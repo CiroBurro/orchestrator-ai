@@ -13,4 +13,4 @@ Al momento ho inserito tre tipologie di agenti: chabot generici, assistenti per 
 ## Installazione
 Al momento l'unico modo per usare orchestrator ai è clonare la repo e installare le dipendenze manualmente, consiglio di farlo in un ambiente virtuale python apposito per il progetto.
 ## IMPORTANTE
-Questo programma è solo un gestore di ai agents, non un modello ai vero e proprio, pertanto utilizza modelli preaddestrati tramite le api di sambanova.ai e mistral.ai. Per poterlo utilizza quindi è necessario procurarsele, almeno una delle due, creando un account al loro sito web, sottolineo che è gratuito.
+Questo programma è solo un gestore di ai agents, non un modello ai vero e proprio, pertanto utilizza modelli preaddestrati tramite le api di sambanova.ai e mistral.ai. Per poterlo utilizza quindi è necessario procurarsele, almeno una delle due, creando un account al loro sito web, sottolineo che è gratuito. Successivamente devono essere aggiunte come variabili d'ambiente sul proprio computer col nome "SAMBANOVA_API_KEY" e "MISTRAL_API_KEY"
