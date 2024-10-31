@@ -1,6 +1,6 @@
-import openai, time, os
+import openai, time, os, base64
 from dotenv import load_dotenv
-from prompts import uncensored_assistant, python_coder, rust_coder, summerizer, math
+from prompts import uncensored_assistant, python_coder, rust_coder, summerizer, math, appunti
 
 #caricara le variabili d'ambiente
 load_dotenv()
@@ -11,6 +11,7 @@ url_openrouter = 'https://openrouter.ai/api/v1'
 url_huggingface='https://api-inference.huggingface.co/v1/'
 url_ollama='http://localhost:11434/v1'
 
+img = False
 
 #creazione degli agenti
 class agente:
@@ -49,10 +50,15 @@ math_2 = agente(modello='mistral-large-latest', prompt=math.system_prompt, url=u
 math_3 = agente(modello='nousresearch/hermes-3-llama-3.1-405b:free', prompt=math.system_prompt, url=url_openrouter, nome="Mat", temperature=0.1)
 math_4 = agente(modello='qwen/qwen-2-7b-instruct:free', prompt=math.system_prompt, url=url_openrouter, nome="Mat", temperature=0.1)
 
+appunti_1 = agente(modello='Llama-3.2-90B-Vision-Instruct', prompt=appunti.system_prompt, url=url_sambanova, nome="Memo", temperature=0.6)
+appunti_2 = agente(modello='meta-llama/llama-3.2-11b-vision-instruct:free', prompt=appunti.system_prompt, url=url_openrouter, nome="Memo", temperature=0.6)
+appunti_3 = agente(modello='pixtral-12b-latest', prompt=appunti.system_prompt, url=url_mistral, nome="Memo", temperature=0.6)
+
 #funzioni principali
 def seleziona_agente():
+    global img
     while True:
-        print("\033[95mSeleziona l'agente che desideri utilizzare:\n\033[0m\n\033[94m-----------------Chat Generica-----------------\033[0m\n1. Tank - Llama 3.1 405B uncensored (sambanova)\n2. Tank - Llama 3.2 90B uncensored (sambanova)\n3. Tank - Mistral large uncensored (mistral)\n4. Tank - Hermes 3 405 uncensored (openrouter)\n\033[94m\n-----------------Programmazione----------------\033[0m\n5. Rusty - Codestral (mistral)\n6. Rusty - Hermes 3 405B (openrouter)\n7. Pitone - Codestral (mistral)\n8. Pitone - Hermes 3 405B (openrouter)\n\033[94m\n-------------------Riassunti-------------------\033[0m\n9. Sam - Llama 3.1 405B (sambanova)\n10. Sam - Llama 3.2 90B (sambanova)\n11. Sam - Mistral large (mistral)\n12. Sam - Hermes 3 405B (openrouter)\n\033[94m\n------------------Matematica------------------\033[0m\n13. Mat - Mathstral 7B (ollama)\n14. Mat - Mistral Large (mistral)\n15. Mat - Hermes 3 405B (openrouter)\n16. Mat - Qwen 2 7B (openrouter)\n")
+        print("\033[95mSeleziona l'agente che desideri utilizzare:\n\033[0m\n\033[94m-----------------Chat Generica-----------------\033[0m\n1. Tank - Llama 3.1 405B uncensored (sambanova)\n2. Tank - Llama 3.2 90B uncensored (sambanova)\n3. Tank - Mistral large uncensored (mistral)\n4. Tank - Hermes 3 405 uncensored (openrouter)\n\033[94m\n-----------------Programmazione----------------\033[0m\n5. Rusty - Codestral (mistral)\n6. Rusty - Hermes 3 405B (openrouter)\n7. Pitone - Codestral (mistral)\n8. Pitone - Hermes 3 405B (openrouter)\n\033[94m\n-------------------Riassunti-------------------\033[0m\n9. Sam - Llama 3.1 405B (sambanova)\n10. Sam - Llama 3.2 90B (sambanova)\n11. Sam - Mistral large (mistral)\n12. Sam - Hermes 3 405B (openrouter)\n\033[94m\n------------------Matematica-------------------\033[0m\n13. Mat - Mathstral 7B (ollama)\n14. Mat - Mistral Large (mistral)\n15. Mat - Hermes 3 405B (openrouter)\n16. Mat - Qwen 2 7B (openrouter)\n\033[94m\n--------------------Appunti--------------------\033[0m\n17. Memo - Llama 3.2 Vision 90B (sambanova)\n18. Memo - Llama 3.2 Vision 11B (openrouter)\n19. Memo - Pixtral 12B (mistral)\n")
         print("\033[91mAssicurati di avere almeno una delle chiavi api di sambanova, mistral e/o openrouter nelle proprie variabile d'ambiente come SAMBANOVA_API_KEY, MISTRAL_API_KEY e OPENROUTER_API_KEY, rispettivamente.\nNB: per usare i modelli ollama devi prima scaricarlo sul computer e poi scaricare localmente i modelli.\033[0m")
         print("\033[94m\nDigita '/exit' per uscire.\033[0m")
         scelta = input("\nInput:")
@@ -90,6 +96,15 @@ def seleziona_agente():
                 return math_3.ottieni_dati()
             case "16":
                 return math_4.ottieni_dati()
+            case "17":
+                img = True
+                return appunti_1.ottieni_dati()
+            case "18":
+                img = True
+                return appunti_2.ottieni_dati()
+            case "19":
+                img = True
+                return appunti_3.ottieni_dati()
             case "/exit":
                 print("\033[95m\nArrivederci!\n\033[0m")
                 exit(0)
@@ -99,6 +114,7 @@ def seleziona_agente():
                 pulisci_schermo()
 
 def converazione(client, modello, prompt, nome, temperature):
+    global img
     pulisci_schermo()
     print(f"\033[95mSono {nome}, il tuo assistente personale, dimmi cosa posso fare per te.\033[0m \n") 
 
@@ -109,23 +125,50 @@ def converazione(client, modello, prompt, nome, temperature):
 
         if domanda == "/exit":
             break
-        if "/file" in domanda:
+        if "/file" in domanda and img == False:
             file = domanda.split(" ")[1]
             testo = leggi_doc(file)
             if testo:
                 prompt += "file caricato:" + testo + "\n"
                 print("\n\033[94m File caricato con successo\033[0m\n")
-            
+        if "/file" in domanda and img == True:
+            file = domanda.split(" ")[1]
+            base64_image = encode_image(file)
 
-        #invia l'input al client e restituisce la risposta
-        risposta = client.chat.completions.create(
-            model = modello,
-            messages=[{"role":"system","content":prompt},{"role":"user","content":domanda}],
-            temperature =  temperature,
-            top_p = 0.1
-        )
+        if img == False:
+            #invia l'input al client e restituisce la risposta
+            risposta = client.chat.completions.create(
+                model = modello,
+                messages=[{"role":"system","content":prompt},{"role":"user","content":domanda}],
+                temperature =  temperature,
+                top_p = 0.1
+            )
 
-        print("\n\033[94m" + risposta.choices[0].message.content + "\033[0m\n")
+            print("\n\033[94m" + risposta.choices[0].message.content + "\033[0m\n")
+        elif img == True:
+            risposta = client.chat.completions.create(
+                model=modello,
+                messages=[
+                    {
+                    "role": "user",
+                    "content": [
+                        {
+                        "type": "text",
+                        "text": domanda + "Trascrivi il testo contenuto in questa immagine"
+                        },
+                        {
+                        "type": "image_url",
+                        "image_url": {
+                            "url":  f"data:image/jpeg;base64,{base64_image}"
+                        },
+                        },
+                    ],
+                    }
+                ],
+                temperature =  temperature,
+                top_p = 0.1,
+            )    
+            print("\n\033[94m" + risposta.choices[0].message.content + "\033[0m\n")
 
         if modello != "mathstral:latest":
             #aggiunge la domanda e la risposta al contesto del prompt per la memoria dell'agente
@@ -145,6 +188,15 @@ def leggi_doc(path):
         print(f"Errore: il file '{path}' non esiste.")
     except IOError:
         print(f"Errore: impossibile leggere il file '{path}'.")
+
+def encode_image(image_path):
+    try:
+      with open(image_path, "rb") as image_file:
+            return base64.b64encode(image_file.read()).decode('utf-8')
+    except FileNotFoundError:
+        print(f"Errore: il file '{image_path}' non esiste.")
+    except IOError:
+        print(f"Errore: impossibile leggere il file '{image_path}'.")
 
 def main():
     while True:
