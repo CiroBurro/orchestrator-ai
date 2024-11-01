@@ -10,6 +10,7 @@ url_sambanova = 'https://api.sambanova.ai/v1'
 url_openrouter = 'https://openrouter.ai/api/v1'
 url_huggingface='https://api-inference.huggingface.co/v1/'
 url_ollama='http://localhost:11434/v1'
+url_github='https://models.inference.ai.azure.com'
 
 img = False
 
@@ -34,6 +35,7 @@ uncensored_assistant_1 = agente(modello='Meta-Llama-3.1-405B-Instruct', prompt=u
 uncensored_assistant_2 = agente(modello='Llama-3.2-90B-Vision-Instruct', prompt=uncensored_assistant.system_prompt, url=url_sambanova, nome="Tank", temperature=0.8)
 uncensored_assistant_3 = agente(modello='mistral-large-latest', prompt=uncensored_assistant.system_prompt, url=url_mistral, nome="Tank", temperature=0.8)
 uncensored_assistant_4 = agente(modello='nousresearch/hermes-3-llama-3.1-405b:free', prompt=uncensored_assistant.system_prompt, url=url_openrouter, nome="Tank", temperature=0.8)
+uncensored_assistant_5 = agente(modello='gpt-4o', prompt=uncensored_assistant.system_prompt, url=url_github, nome="Tank", temperature=0.8)
 
 rust_coder_1 = agente(modello='codestral-latest', prompt=rust_coder.system_prompt, url=url_mistral, nome="Rusty", temperature=0.1)
 rust_coder_2 = agente(modello='codestral-mamba-latest', prompt=rust_coder.system_prompt, url=url_mistral, nome="Rusty", temperature=0.1)
@@ -46,6 +48,7 @@ summerizer_1 = agente(modello='Meta-Llama-3.1-405B-Instruct', prompt=summerizer.
 summerizer_2 = agente(modello='Llama-3.2-90B-Vision-Instruct', prompt=summerizer.system_prompt, url=url_sambanova, nome="Sam", temperature=0.4)
 summerizer_3 = agente(modello='mistral-large-latest', prompt=summerizer.system_prompt, url=url_mistral, nome="Sam", temperature=0.4)
 summerizer_4 = agente(modello='nousresearch/hermes-3-llama-3.1-405b:free', prompt=summerizer.system_prompt, url=url_openrouter, nome="Sam", temperature=0.4)
+summerizer_5 = agente(modello='gpt-4o-mini', prompt=summerizer.system_prompt, url=url_github, nome="Sam", temperature=0.4)
 
 math_1 = agente(modello='mathstral:latest', prompt="sei un'assistente utile, parla italiano e non formattare il testo in un altro formato", url=url_ollama, nome="Mat", temperature=0.1) #non serve dargli un prompt avanzato perché il modello è già istruito su quello che deve fare
 math_2 = agente(modello='mistral-large-latest', prompt=math.system_prompt, url=url_mistral, nome="Mat", temperature=0.1)
@@ -55,13 +58,14 @@ math_4 = agente(modello='qwen/qwen-2-7b-instruct:free', prompt=math.system_promp
 appunti_1 = agente(modello='Llama-3.2-90B-Vision-Instruct', prompt=appunti.system_prompt, url=url_sambanova, nome="Memo", temperature=0.6)
 appunti_2 = agente(modello='meta-llama/llama-3.2-11b-vision-instruct:free', prompt=appunti.system_prompt, url=url_openrouter, nome="Memo", temperature=0.6)
 appunti_3 = agente(modello='pixtral-12b-latest', prompt=appunti.system_prompt, url=url_mistral, nome="Memo", temperature=0.6)
+appunti_4 = agente(modello='gpt-4o-mini', prompt=appunti.system_prompt, url=url_github, nome="Memo", temperature=0.6)
 
 #funzioni principali
 def seleziona_agente():
     global img
     while True:
-        print("\033[95mSeleziona l'agente che desideri utilizzare:\n\033[0m\n\033[94m-----------------Chat Generica-----------------\033[0m\n1. Tank - Llama 3.1 405B uncensored (sambanova)\n2. Tank - Llama 3.2 90B uncensored (sambanova)\n3. Tank - Mistral large uncensored (mistral)\n4. Tank - Hermes 3 405 uncensored (openrouter)\n\033[94m\n-----------------Programmazione----------------\033[0m\n5. Rusty - Codestral (mistral)\n6. Rusty - Codestral Mamba (mistral)\n7. Rusty - Hermes 3 405B (openrouter)\n8. Pitone - Codestral (mistral)\n9. Pitone - Codestral Mamba (mistral)\n10. Pitone - Hermes 3 405B (openrouter)\n\033[94m\n-------------------Riassunti-------------------\033[0m\n11. Sam - Llama 3.1 405B (sambanova)\n12. Sam - Llama 3.2 90B (sambanova)\n13. Sam - Mistral large (mistral)\n14. Sam - Hermes 3 405B (openrouter)\n\033[94m\n------------------Matematica-------------------\033[0m\n15. Mat - Mathstral 7B (ollama)\n16. Mat - Mistral Large (mistral)\n17. Mat - Hermes 3 405B (openrouter)\n18. Mat - Qwen 2 7B (openrouter)\n\033[94m\n--------------------Appunti--------------------\033[0m\n19. Memo - Llama 3.2 Vision 90B (sambanova)\n20. Memo - Llama 3.2 Vision 11B (openrouter)\n21. Memo - Pixtral 12B (mistral)\n")
-        print("\033[91mAssicurati di avere almeno una delle chiavi api di sambanova, mistral e/o openrouter nelle proprie variabile d'ambiente come SAMBANOVA_API_KEY, MISTRAL_API_KEY e OPENROUTER_API_KEY, rispettivamente.\nNB: per usare i modelli ollama devi prima scaricarlo sul computer e poi scaricare localmente i modelli.\033[0m")
+        print("\033[95mSeleziona l'agente che desideri utilizzare:\n\033[0m\n\033[94m-----------------Chat Generica-----------------\033[0m\n1. Tank - Llama 3.1 405B uncensored (sambanova)\n2. Tank - Llama 3.2 90B uncensored (sambanova)\n3. Tank - Mistral large uncensored (mistral)\n4. Tank - Hermes 3 405 uncensored (openrouter)\n5. Tank - GPT 4o uncensored (github)\n\033[94m\n-----------------Programmazione----------------\033[0m\n6. Rusty - Codestral (mistral)\n7. Rusty - Codestral Mamba (mistral)\n8. Rusty - Hermes 3 405B (openrouter)\n9. Pitone - Codestral (mistral)\n10. Pitone - Codestral Mamba (mistral)\n11. Pitone - Hermes 3 405B (openrouter)\n\033[94m\n-------------------Riassunti-------------------\033[0m\n12. Sam - Llama 3.1 405B (sambanova)\n13. Sam - Llama 3.2 90B (sambanova)\n14. Sam - Mistral large (mistral)\n15. Sam - Hermes 3 405B (openrouter)\n16. Sam - GPT 4o mini (github)\n\033[94m\n------------------Matematica-------------------\033[0m\n17. Mat - Mathstral 7B (ollama)\n18. Mat - Mistral Large (mistral)\n19. Mat - Hermes 3 405B (openrouter)\n20. Mat - Qwen 2 7B (openrouter)\n\033[94m\n--------------------Appunti--------------------\033[0m\n21. Memo - Llama 3.2 Vision 90B (sambanova)\n22. Memo - Llama 3.2 Vision 11B (openrouter)\n23. Memo - Pixtral 12B (mistral)\n24. Memo - GPT 4o mini (github)\n")
+        print("\033[91mAssicurati di avere almeno una delle chiavi api di sambanova, mistral, openrouter e/o github models nelle proprie variabile d'ambiente come SAMBANOVA_API_KEY, MISTRAL_API_KEY, OPENROUTER_API_KEY e GITHUB_API_KEY rispettivamente.\nNB: per usare i modelli ollama devi prima scaricarlo sul computer e poi scaricare localmente i modelli.\033[0m")
         print("\033[94m\nDigita '/exit' per uscire.\033[0m")
         scelta = input("\nInput:")
         #confronta la scelta con gli agenti, e quando trova quello corrispondente ne estrae i dati
@@ -80,55 +84,64 @@ def seleziona_agente():
                 return uncensored_assistant_4.ottieni_dati()
             case "5":
                 img = False
-                return rust_coder_1.ottieni_dati()
+                return uncensored_assistant_5.ottieni_dati()
             case "6":
                 img = False
-                return rust_coder_2.ottieni_dati()
+                return rust_coder_1.ottieni_dati()
             case "7":
                 img = False
-                return rust_coder_3.ottieni_dati()
+                return rust_coder_2.ottieni_dati()
             case "8":
                 img = False
-                return python_coder_1.ottieni_dati()
+                return rust_coder_3.ottieni_dati()
             case "9":
                 img = False
-                return python_coder_2.ottieni_dati()
+                return python_coder_1.ottieni_dati()
             case "10":
                 img = False
-                return python_coder_3.ottieni_dati()
+                return python_coder_2.ottieni_dati()
             case "11":
                 img = False
-                return summerizer_1.ottieni_dati()
+                return python_coder_3.ottieni_dati()
             case "12":
                 img = False
-                return summerizer_2.ottieni_dati()
+                return summerizer_1.ottieni_dati()
             case "13":
                 img = False
-                return summerizer_3.ottieni_dati()
+                return summerizer_2.ottieni_dati()
             case "14":
                 img = False
-                return summerizer_4.ottieni_dati()
+                return summerizer_3.ottieni_dati()
             case "15":
                 img = False
-                return math_1.ottieni_dati()
+                return summerizer_4.ottieni_dati()
             case "16":
                 img = False
-                return math_2.ottieni_dati()
+                return summerizer_5.ottieni_dati()
             case "17":
                 img = False
-                return math_3.ottieni_dati()
+                return math_1.ottieni_dati()
             case "18":
                 img = False
-                return math_4.ottieni_dati()
+                return math_2.ottieni_dati()
             case "19":
-                img = True
-                return appunti_1.ottieni_dati()
+                img = False
+                return math_3.ottieni_dati()
             case "20":
-                img = True
-                return appunti_2.ottieni_dati()
+                img = False
+                return math_4.ottieni_dati()
             case "21":
                 img = True
+                return appunti_1.ottieni_dati()
+            case "22":
+                img = True
+                return appunti_2.ottieni_dati()
+            case "23":
+                img = True
                 return appunti_3.ottieni_dati()
+            case "24":
+                img = True
+                return appunti_4.ottieni_dati()
             case "/exit":
                 print("\033[95m\nArrivederci!\n\033[0m")
                 exit(0)
@@ -179,6 +192,7 @@ def converazione(client, modello, prompt, nome, temperature):
                         {
                         "type": "text",
                         "text": domanda + "Trascrivi il testo contenuto in questa immagine"
+                        #"text": "describe this image"
                         },
                         {
                         "type": "image_url",
@@ -236,6 +250,8 @@ def main():
             api_key = os.getenv("HUGGINGFACE_API_KEY")
         elif url == url_ollama:
             api_key = "ollama"
+        elif url == url_github:
+            api_key = os.getenv("GITHUB_API_KEY")
         
         #crea un client e si connette all'api di sambanova o mistral
         client = openai.OpenAI(
