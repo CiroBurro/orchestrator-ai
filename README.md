@@ -1,16 +1,39 @@
 # Orchestrator AI
-![Screenshot 2024-10-30 alle 17 35 13](https://github.com/user-attachments/assets/286e2111-e382-439e-ace1-bb3d06cf4d44)
 ## Progetto
-Semplice gestore di agenti ai/assistenti scritto in python per uso personale. Permette di usare i modelli Meta Llama 3.1 405B, Meta Llama 3.2 90B, Mistral Large e Codestral tramite le api gratuite di sambanova.ai e mistral.ai specializzati in determinati compiti tramite appositi prompt.
+Semplice gestore di agenti ai/assistenti scritto in python per uso personale. Permette di usare numerosi modelli tramite le api gratuite di sambanova.ai, mistral.ai e openrouter ai specializzati in determinati compiti tramite appositi prompt.
 ## Agenti
-Al momento ho inserito tre tipologie di agenti: chabot generici, assistenti per la programmazione in rust e in python, e agenti per fare il riassunto di testi (non ancora testati)
-- Per i chatbot generici e i "summerizers" è possibile scegliere tra i modelli più grandi Meta Llama 3.1 405B, Meta Llama 3.2 90B e Mistral Large
-- Per gli assistenti per la programmazione è impostato solo il modello "codestral" dal momento che è meno pesante e ottimizzato per questa task
+Le tipologie di agenti disponibili sono:
+- Chat generica
+- Programmazione (rust e python)
+- Riassunti (da testare)
+- Matematica
+- Trascrizione di appunti (risultati buoni ma non perfetti)
+
+![Screenshot 2024-11-01 alle 12 14 54](https://github.com/user-attachments/assets/3694ec69-ac1f-4183-85a7-034f9f652f2f)
 ## To-do
-- [ ] Aggiunta di altri agenti per altre task
+- [X] Aggiunta di altri agenti per altre task
 - [ ] Implementare funzioni personalizzate (tools) che gli agenti possono utilizzare per restituire un'output più accurato o svolgere azioni più complesse
 - [ ] Creazione di uno script per automatizzare l'installazione
 ## Installazione
-Al momento l'unico modo per usare orchestrator ai è clonare la repo e installare le dipendenze manualmente, consiglio di farlo in un ambiente virtuale python apposito per il progetto.
+Per ora l'unico modo per usare orchestrator ai è clonare la repo e installare le dipendenze manualmente, consiglio di farlo in un ambiente virtuale python apposito per il progetto.
 ## IMPORTANTE
-Questo programma è solo un gestore di ai agents, non un modello ai vero e proprio, pertanto utilizza modelli preaddestrati tramite le api di sambanova.ai e mistral.ai. Per poterlo utilizza quindi è necessario procurarsele, almeno una delle due, creando un account al loro sito web, sottolineo che è gratuito. Successivamente devono essere aggiunte come variabili d'ambiente sul proprio computer col nome "SAMBANOVA_API_KEY" e "MISTRAL_API_KEY"
+Questo programma è solo un gestore di ai agents, non un modello ai vero e proprio, pertanto utilizza modelli preaddestrati tramite le api di sambanova.ai, mistral.ai e openrouter.ai. Per poterlo utilizza quindi è necessario procurarsele, almeno una delle tre, creando un account al loro sito web, e sottolineo che è gratuito. Successivamente devono essere aggiunte come variabili d'ambiente sul proprio computer col nome "SAMBANOVA_API_KEY", "MISTRAL_API_KEY" e "OPENROUTER_API_KEY"
+## Comandi e tool
+Gli unici due comandi utilizzabili sono:
+- /exit : per uscire sia dalla conversazione sia dal programma quando si è nella fase di selezione dell'agente
+- /file : per usare i tool implementati
+
+I tool invece sono:
+- Possibilità di leggere informazioni da un file di testo, vale per tutti gli agenti eccetto quelli appartenenti alla categoria "appunti"
+- Possibilità di visualizzare immagini e trascrivere il testo contenuto al loro interno, vale solo per gli agenti della categoria "appunti"
+
+Utilizzo dei tool:
+Sia quando si carica un file sia quando si carica un'immagine bisogna usare il comando /file seguito dal percorso del file/immagine. Successivamente è possibile inserire ulteriori comandi.
+
+Esempi:
+">/file /path/to/file/txt"
+">/file /path/to/img trascrivi il testo contenuto in questa immagine"
+
+
+Attenzione!
+L'unica dicitura corretta è quella degli esempi: è necessario scrivere /file subito dopo il simbolo ">" senza spazi prima e affianco il percorso del file lasciando uno spazio, eventuali istruzioni vanno inseriti alla fine
