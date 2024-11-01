@@ -65,36 +65,52 @@ def seleziona_agente():
         #confronta la scelta con gli agenti, e quando trova quello corrispondente ne estrae i dati
         match scelta:
             case "1":
+                img = False
                 return uncensored_assistant_1.ottieni_dati()
             case "2":
+                img = False
                 return uncensored_assistant_2.ottieni_dati()
             case "3":
+                img = False
                 return uncensored_assistant_3.ottieni_dati()
             case "4":
+                img = False
                 return uncensored_assistant_4.ottieni_dati()
             case "5":
+                img = False
                 return rust_coder_1.ottieni_dati()
             case "6":
+                img = False
                 return rust_coder_2.ottieni_dati()
             case "7":
+                img = False
                 return python_coder_1.ottieni_dati()
             case "8":
+                img = False
                 return python_coder_2.ottieni_dati()
             case "9":
+                img = False
                 return summerizer_1.ottieni_dati()
             case "10":
+                img = False
                 return summerizer_2.ottieni_dati()
             case "11":
+                img = False
                 return summerizer_3.ottieni_dati()
             case "12":
+                img = False
                 return summerizer_4.ottieni_dati()
             case "13":
+                img = False
                 return math_1.ottieni_dati()
             case "14":
+                img = False
                 return math_2.ottieni_dati()
             case "15":
+                img = False
                 return math_3.ottieni_dati()
             case "16":
+                img = False
                 return math_4.ottieni_dati()
             case "17":
                 img = True
