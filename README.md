@@ -16,7 +16,7 @@ Le tipologie di agenti disponibili sono:
 - [ ] Creazione di uno script per automatizzare l'installazione
 ## Installazione
 ### Installare il pacchetto
-Il programma è caricato sul repository PYPI: https://pypi.org/project/orchestrator-ai/, basterà quindi avere installato python ed eseguire il comando:
+Il programma è caricato sul repository PYPI: https://pypi.org/project/orchestrator.ai/, basterà quindi avere installato python ed eseguire il comando:
 ```bash
 pip install orchestrator-ai
 ```
