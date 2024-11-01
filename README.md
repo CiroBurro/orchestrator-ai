@@ -1,6 +1,6 @@
 # Orchestrator AI
 ## Progetto
-Semplice gestore di agenti ai/assistenti scritto in python per uso personale. Permette di usare numerosi modelli tramite le api gratuite di sambanova.ai, mistral.ai e openrouter ai specializzati in determinati compiti tramite appositi prompt.
+Semplice gestore di agenti ai/assistenti scritto in python per uso personale. Permette di usare numerosi modelli tramite le api gratuite di sambanova.ai, mistral.ai, openrouter.ai e github.com specializzati in determinati compiti tramite appositi prompt.
 ## Agenti
 Le tipologie di agenti disponibili sono:
 - Chat generica
@@ -17,7 +17,7 @@ Le tipologie di agenti disponibili sono:
 ## Installazione
 Per ora l'unico modo per usare orchestrator ai è clonare la repo e installare le dipendenze manualmente, consiglio di farlo in un ambiente virtuale python apposito per il progetto.
 ## IMPORTANTE
-Questo programma è solo un gestore di ai agents, non un modello ai vero e proprio, pertanto utilizza modelli preaddestrati tramite le api di sambanova.ai, mistral.ai e openrouter.ai. Per poterlo utilizza quindi è necessario procurarsele, almeno una delle tre, creando un account al loro sito web, e sottolineo che è gratuito. Successivamente devono essere aggiunte come variabili d'ambiente sul proprio computer col nome "SAMBANOVA_API_KEY", "MISTRAL_API_KEY" e "OPENROUTER_API_KEY"
+Questo programma è solo un gestore di ai agents, non un modello ai vero e proprio, pertanto utilizza modelli preaddestrati tramite le api di sambanova.ai, mistral.ai, openrouter.ai e github.com. Per poterlo utilizza quindi è necessario procurarsele, almeno una delle tre, creando un account al loro sito web, e sottolineo che è gratuito. Successivamente devono essere aggiunte come variabili d'ambiente sul proprio computer col nome "SAMBANOVA_API_KEY", "MISTRAL_API_KEY", "OPENROUTER_API_KEY" e "GITHUB_API_KEY".
 ## Comandi e tool
 Gli unici due comandi utilizzabili sono:
 - /exit : per uscire sia dalla conversazione sia dal programma quando si è nella fase di selezione dell'agente
