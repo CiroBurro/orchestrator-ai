@@ -15,7 +15,29 @@ Le tipologie di agenti disponibili sono:
 - [ ] Implementare funzioni personalizzate (tools) che gli agenti possono utilizzare per restituire un'output più accurato o svolgere azioni più complesse
 - [ ] Creazione di uno script per automatizzare l'installazione
 ## Installazione
-Per ora l'unico modo per usare orchestrator ai è clonare la repo e installare le dipendenze manualmente, consiglio di farlo in un ambiente virtuale python apposito per il progetto.
+### Installare il pacchetto
+Il programma è caricato sul repository PYPI: https://pypi.org/project/orchestrator-ai/, basterà quindi avere installato python ed eseguire il comando:
+```bash
+pip install orchestrator-ai
+```
+Per eseguirlo sarà sufficiente invece lanciare dal terminale il comando:
+```bash
+orchestrator-ai
+```
+### Installazione manuale
+Se si preferisce installare il programma manualmente bisogna clonare questo repository:
+```bash
+git clone https://github.com/ciromattia/orchestrator-ai.git
+```
+Entrare nella cartella del progetto e installare le dipendenze:
+```bash
+cd orchestrator-ai
+pip install -r requirements.txt
+```
+Infine lanciare il programma con python:
+```bash
+python orchestrator-ai.py
+```
 ## IMPORTANTE
 Questo programma è solo un gestore di ai agents, non un modello ai vero e proprio, pertanto utilizza modelli preaddestrati tramite le api di sambanova.ai, mistral.ai, openrouter.ai e github.com. Per poterlo utilizza quindi è necessario procurarsele, almeno una delle tre, creando un account al loro sito web, e sottolineo che è gratuito. Successivamente devono essere aggiunte come variabili d'ambiente sul proprio computer col nome "SAMBANOVA_API_KEY", "MISTRAL_API_KEY", "OPENROUTER_API_KEY" e "GITHUB_API_KEY".
 ## Comandi e tool
