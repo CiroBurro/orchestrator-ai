@@ -36,9 +36,11 @@ uncensored_assistant_3 = agente(modello='mistral-large-latest', prompt=uncensore
 uncensored_assistant_4 = agente(modello='nousresearch/hermes-3-llama-3.1-405b:free', prompt=uncensored_assistant.system_prompt, url=url_openrouter, nome="Tank", temperature=0.8)
 
 rust_coder_1 = agente(modello='codestral-latest', prompt=rust_coder.system_prompt, url=url_mistral, nome="Rusty", temperature=0.1)
-rust_coder_2 = agente(modello='nousresearch/hermes-3-llama-3.1-405b:free', prompt=rust_coder.system_prompt, url=url_openrouter, nome="Rusty", temperature=0.1)
+rust_coder_2 = agente(modello='codestral-mamba-latest', prompt=rust_coder.system_prompt, url=url_mistral, nome="Rusty", temperature=0.1)
+rust_coder_3 = agente(modello='nousresearch/hermes-3-llama-3.1-405b:free', prompt=rust_coder.system_prompt, url=url_openrouter, nome="Rusty", temperature=0.1)
 python_coder_1 = agente(modello='codestral-latest', prompt=python_coder.system_prompt, url=url_mistral, nome="Pitone", temperature=0.1)
-python_coder_2 = agente(modello='nousresearch/hermes-3-llama-3.1-405b:free', prompt=python_coder.system_prompt, url=url_openrouter, nome="Pitone", temperature=0.1)
+python_coder_2 = agente(modello='codestral-mamba-latest', prompt=python_coder.system_prompt, url=url_mistral, nome="Pitone", temperature=0.1)
+python_coder_3 = agente(modello='nousresearch/hermes-3-llama-3.1-405b:free', prompt=python_coder.system_prompt, url=url_openrouter, nome="Pitone", temperature=0.1)
 
 summerizer_1 = agente(modello='Meta-Llama-3.1-405B-Instruct', prompt=summerizer.system_prompt, url=url_sambanova, nome="Sam", temperature=0.4)
 summerizer_2 = agente(modello='Llama-3.2-90B-Vision-Instruct', prompt=summerizer.system_prompt, url=url_sambanova, nome="Sam", temperature=0.4)
@@ -58,7 +60,7 @@ appunti_3 = agente(modello='pixtral-12b-latest', prompt=appunti.system_prompt, u
 def seleziona_agente():
     global img
     while True:
-        print("\033[95mSeleziona l'agente che desideri utilizzare:\n\033[0m\n\033[94m-----------------Chat Generica-----------------\033[0m\n1. Tank - Llama 3.1 405B uncensored (sambanova)\n2. Tank - Llama 3.2 90B uncensored (sambanova)\n3. Tank - Mistral large uncensored (mistral)\n4. Tank - Hermes 3 405 uncensored (openrouter)\n\033[94m\n-----------------Programmazione----------------\033[0m\n5. Rusty - Codestral (mistral)\n6. Rusty - Hermes 3 405B (openrouter)\n7. Pitone - Codestral (mistral)\n8. Pitone - Hermes 3 405B (openrouter)\n\033[94m\n-------------------Riassunti-------------------\033[0m\n9. Sam - Llama 3.1 405B (sambanova)\n10. Sam - Llama 3.2 90B (sambanova)\n11. Sam - Mistral large (mistral)\n12. Sam - Hermes 3 405B (openrouter)\n\033[94m\n------------------Matematica-------------------\033[0m\n13. Mat - Mathstral 7B (ollama)\n14. Mat - Mistral Large (mistral)\n15. Mat - Hermes 3 405B (openrouter)\n16. Mat - Qwen 2 7B (openrouter)\n\033[94m\n--------------------Appunti--------------------\033[0m\n17. Memo - Llama 3.2 Vision 90B (sambanova)\n18. Memo - Llama 3.2 Vision 11B (openrouter)\n19. Memo - Pixtral 12B (mistral)\n")
+        print("\033[95mSeleziona l'agente che desideri utilizzare:\n\033[0m\n\033[94m-----------------Chat Generica-----------------\033[0m\n1. Tank - Llama 3.1 405B uncensored (sambanova)\n2. Tank - Llama 3.2 90B uncensored (sambanova)\n3. Tank - Mistral large uncensored (mistral)\n4. Tank - Hermes 3 405 uncensored (openrouter)\n\033[94m\n-----------------Programmazione----------------\033[0m\n5. Rusty - Codestral (mistral)\n6. Rusty - Codestral Mamba (mistral)\n7. Rusty - Hermes 3 405B (openrouter)\n8. Pitone - Codestral (mistral)\n9. Pitone - Codestral Mamba (mistral)\n10. Pitone - Hermes 3 405B (openrouter)\n\033[94m\n-------------------Riassunti-------------------\033[0m\n11. Sam - Llama 3.1 405B (sambanova)\n12. Sam - Llama 3.2 90B (sambanova)\n13. Sam - Mistral large (mistral)\n14. Sam - Hermes 3 405B (openrouter)\n\033[94m\n------------------Matematica-------------------\033[0m\n15. Mat - Mathstral 7B (ollama)\n16. Mat - Mistral Large (mistral)\n17. Mat - Hermes 3 405B (openrouter)\n18. Mat - Qwen 2 7B (openrouter)\n\033[94m\n--------------------Appunti--------------------\033[0m\n19. Memo - Llama 3.2 Vision 90B (sambanova)\n20. Memo - Llama 3.2 Vision 11B (openrouter)\n21. Memo - Pixtral 12B (mistral)\n")
         print("\033[91mAssicurati di avere almeno una delle chiavi api di sambanova, mistral e/o openrouter nelle proprie variabile d'ambiente come SAMBANOVA_API_KEY, MISTRAL_API_KEY e OPENROUTER_API_KEY, rispettivamente.\nNB: per usare i modelli ollama devi prima scaricarlo sul computer e poi scaricare localmente i modelli.\033[0m")
         print("\033[94m\nDigita '/exit' per uscire.\033[0m")
         scelta = input("\nInput:")
@@ -84,41 +86,47 @@ def seleziona_agente():
                 return rust_coder_2.ottieni_dati()
             case "7":
                 img = False
-                return python_coder_1.ottieni_dati()
+                return rust_coder_3.ottieni_dati()
             case "8":
                 img = False
-                return python_coder_2.ottieni_dati()
+                return python_coder_1.ottieni_dati()
             case "9":
                 img = False
-                return summerizer_1.ottieni_dati()
+                return python_coder_2.ottieni_dati()
             case "10":
                 img = False
-                return summerizer_2.ottieni_dati()
+                return python_coder_3.ottieni_dati()
             case "11":
                 img = False
-                return summerizer_3.ottieni_dati()
+                return summerizer_1.ottieni_dati()
             case "12":
                 img = False
-                return summerizer_4.ottieni_dati()
+                return summerizer_2.ottieni_dati()
             case "13":
                 img = False
-                return math_1.ottieni_dati()
+                return summerizer_3.ottieni_dati()
             case "14":
                 img = False
-                return math_2.ottieni_dati()
+                return summerizer_4.ottieni_dati()
             case "15":
                 img = False
-                return math_3.ottieni_dati()
+                return math_1.ottieni_dati()
             case "16":
                 img = False
-                return math_4.ottieni_dati()
+                return math_2.ottieni_dati()
             case "17":
+                img = False
+                return math_3.ottieni_dati()
+            case "18":
+                img = False
+                return math_4.ottieni_dati()
+            case "19":
                 img = True
                 return appunti_1.ottieni_dati()
-            case "18":
+            case "20":
                 img = True
                 return appunti_2.ottieni_dati()
-            case "19":
+            case "21":
                 img = True
                 return appunti_3.ottieni_dati()
             case "/exit":
