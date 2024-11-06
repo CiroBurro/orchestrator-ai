@@ -8,8 +8,7 @@ Le tipologie di agenti disponibili sono:
 - Riassunti
 - Matematica
 - Trascrizione di appunti (risultati buoni ma non perfetti)
-
-![Screenshot 2024-11-01 alle 12 14 54](https://github.com/user-attachments/assets/3694ec69-ac1f-4183-85a7-034f9f652f2f)
+![Screenshot 2024-11-06 alle 21 02 55](https://github.com/user-attachments/assets/e342115d-24ab-461a-8a2f-e35f946cf782)
 ## To-do
 Al momento non ho in mente altre idee per il progetto, per ora funziona bene senza bug e lo trovo completo per le mie esigenze, se avete richieste particolari sono pronto a prenderle in considerazione. Al massimo aggiungerò nuovi modelli con eventuali altre API gratuite se ne scopro di nuovi.
 ## Installazione
@@ -30,7 +29,8 @@ git clone https://github.com/CiroBurro/orchestrator-ai.git
 Entrare nella cartella del progetto e installare le dipendenze:
 ```bash
 cd orchestrator-ai
-pip install -r requirements.txt
+pip install -r requirements.txt![Screenshot 2024-11-06 alle 20 59 42](https://github.com/user-attachments/assets/981e1ffa-fd1e-4005-9a18-56fe7525c85c)
+
 ```
 Infine lanciare il programma con python:
 ```bash
