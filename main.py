@@ -158,7 +158,12 @@ def converazione(client, modello, prompt, nome, temperature):
     time.sleep(1)
     while True:
         #chat
-        domanda = input("\033[92m>\033[0m ")
+        try:
+            domanda = input("\033[92m>\033[0m ")
+        except UnicodeDecodeError:
+            print("\033[91mInput non valido, riprova.\033[0m")
+            time.sleep(1)
+
 
         if domanda == "/exit":
             break
@@ -213,6 +218,7 @@ def converazione(client, modello, prompt, nome, temperature):
             prompt += domanda + risposta.choices[0].message.content
         time.sleep(0.5)
 
+
 def pulisci_schermo():
     comando = 'cls' if os.name == 'nt' else 'clear'
     os.system(comando)
@@ -226,6 +232,8 @@ def leggi_doc(path):
         print(f"Errore: il file '{path}' non esiste.")
     except IOError:
         print(f"Errore: impossibile leggere il file '{path}'.")
+    except UnicodeDecodeError:
+        print(f"Errore: il file '{path}' non è un file testo.")
 
 def encode_image(image_path):
     try:

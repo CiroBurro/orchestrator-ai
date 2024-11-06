@@ -5,20 +5,18 @@ Semplice gestore di agenti ai/assistenti scritto in python per uso personale. Pe
 Le tipologie di agenti disponibili sono:
 - Chat generica
 - Programmazione (rust e python)
-- Riassunti (da testare)
+- Riassunti
 - Matematica
 - Trascrizione di appunti (risultati buoni ma non perfetti)
 
 ![Screenshot 2024-11-01 alle 12 14 54](https://github.com/user-attachments/assets/3694ec69-ac1f-4183-85a7-034f9f652f2f)
 ## To-do
-- [X] Aggiunta di altri agenti per altre task
-- [ ] Implementare funzioni personalizzate (tools) che gli agenti possono utilizzare per restituire un'output più accurato o svolgere azioni più complesse
-- [ ] Creazione di uno script per automatizzare l'installazione
+Al momento non ho in mente altre idee per il progetto, per ora funziona bene senza bug e lo trovo completo per le mie esigenze, se avete richieste particolari sono pronto a prenderle in considerazione. Al massimo aggiungerò nuovi modelli con eventuali altre API gratuite se ne scopro di nuovi.
 ## Installazione
 ### Installare il pacchetto
 Il programma è caricato sul repository PYPI: https://pypi.org/project/orchestrator.ai/, basterà quindi avere installato python ed eseguire il comando:
 ```bash
-pip install orchestrator-ai
+pip install orchestrator.ai
 ```
 Per eseguirlo sarà sufficiente invece lanciare dal terminale il comando:
 ```bash
@@ -27,7 +25,7 @@ orchestrator-ai
 ### Installazione manuale
 Se si preferisce installare il programma manualmente bisogna clonare questo repository:
 ```bash
-git clone https://github.com/ciromattia/orchestrator-ai.git
+git clone https://github.com/CiroBurro/orchestrator-ai.git
 ```
 Entrare nella cartella del progetto e installare le dipendenze:
 ```bash
